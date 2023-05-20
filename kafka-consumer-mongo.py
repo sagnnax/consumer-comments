@@ -11,7 +11,7 @@ import subprocess
 
 
 # replace here with your mongodb url 
-uri = "mongodb+srv://adsoft:adsoft-sito@cluster0.kzghgph.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://sagnnax:sanate@nosql.ersuvbb.mongodb.net/?retryWrites=true&w=majority"
 
 
 # Create a new client and connect to the server
@@ -31,13 +31,13 @@ try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
-    db = client.memes
+    db = client.nosql
     print("MongoDB Connected successfully!")
 except:
     print("Could not connect to MongoDB")
 
 consumer = KafkaConsumer('test',bootstrap_servers=[
-     'my-kafka-0.my-kafka-headless.kafka-adsoftsito.svc.cluster.local:9092'
+     'my-kafka-0.my-kafka-headless.sagnnax.svc.cluster.local:9092'
     ])
 # Parse received data from Kafka
 for msg in consumer:
@@ -47,10 +47,10 @@ for msg in consumer:
 
     # Create dictionary and ingest data into MongoDB
     try:
-       meme_rec = {'name':name }
-       print (meme_rec)
-       meme_id = db.memes_info.insert_one(meme_rec)
-       print("Data inserted with record ids", meme_id)
+       nosql_rec = {'name':name }
+       print (nosql_rec)
+       nosql_id = db.nosql_info.insert_one(nosql_rec)
+       print("Data inserted with record ids", nosql_id)
 
        subprocess.call(['sh', './test.sh'])
 
